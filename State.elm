@@ -10,7 +10,10 @@ module State ( State
              , get
              , put
              , modify
+             , mapM
              ) where
+
+import List((::))
 
 type alias State s a = s -> (a, s)
 
@@ -47,4 +50,9 @@ bind f mx = \s -> let (x, s') = mx s in f x s'
 -- A non-principal type was inferred for this, causing wonky errors
 (>!=) : State s a -> (a -> State s b) -> State s b
 (>!=) mx f = bind f mx
+
+mapM : (a -> State s b) -> List a -> State s (List b)
+mapM f xs = case xs of
+  []       -> return []
+  x :: xs' -> f x >!= \y -> map ((::) y) (mapM f xs')
 
