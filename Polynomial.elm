@@ -3,8 +3,13 @@ module Polynomial ( Poly(..)
                   , drawMu
                   , juxt
                   , atop
+                  , (+:)
+                  , (*:)
+                  , var
+                  , unit
                   ) where
 
+import List
 import Graphics.Collage(..)
 import Color
 import Text
@@ -18,15 +23,22 @@ import Debug
 type Poly a
   = Var a
   | Const String
-  | Add (Poly a) (Poly a)
-  | Mul (Poly a) (Poly a)
+  | Sum [Poly a]
+  | Prod [Poly a]
+--  | Add (Poly a) (Poly a)
+--  | Mul (Poly a) (Poly a)
+
+unit = Const "1"
+sum = Sum
+product = Prod
+var = Var ()
 
 map : (a -> b) -> Poly a -> Poly b
 map f p =
   case p of
-    Const _   -> p
-    Add p1 p2 -> Add (map f p1) (map f p2)
-    Mul p1 p2 -> Mul (map f p1) (map f p2)
+    Const x   -> Const x
+    Sum ps -> Sum (List.map (map f) ps)
+    Prod ps -> Sum (List.map (map f) ps)
     Var x     -> Var (f x)
 
 type alias Polynomial = Poly ()
@@ -36,6 +48,20 @@ textForm = toForm << Text.leftAligned << Text.fromString
 
 scaleMatrix x y = Transform2D.matrix x 0 0 y 0 0
 scaleSep x y f = groupTransform (scaleMatrix x y) [f]
+
+inAColumn h xs =
+  let n = toFloat (List.length xs)
+      m = scaleMatrix 1 (1 / n)
+  in
+  groupTransform m
+    (List.indexedMap (\i a -> moveY (h/n * i - h/2) [a]))
+
+inARow h xs =
+  let n = toFloat (List.length xs)
+      m = scaleMatrix (1 / n) 1
+  in
+  groupTransform m
+    (List.indexedMap (\i a -> moveX (h/n * i - h/2) [a]))
 
 atop h a b =
   let m = scaleMatrix 1 (1/2)
@@ -52,6 +78,8 @@ juxt w a b =
 
 mulSeparator len = traced (dashed Color.black) [(-len/2, 0), (len/2, 0)]
 addSeparator len = group [filled Color.green (rect 3 len), filled Color.black (rect 10 3)]
+
+colors = [Color.red, Color.green, Color.blue, Color.yellow, Color.purple, Color.orange]
 
 drawMu : Int -> Float -> Polynomial -> Form
 drawMu maxDepth len p =
@@ -91,7 +119,10 @@ drawMu maxDepth len p =
               go t p2 >!= \r2 ->
                 State.return <| group [juxt len r1 r2, addSep]
   in
-  State.eval (go 5 p) Array.empty
+  State.eval (go maxDepth p) Array.empty
+
+
+{-
 
 drawPoly : Poly Form -> Form
 drawPoly p =
@@ -99,8 +130,6 @@ drawPoly p =
 
 adopt : Polynomial -> Form -> Form
 adopt 
-
-{-
 
 drawPoly : Polynomial -> Form
 
