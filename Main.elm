@@ -16,8 +16,8 @@ twoThreeTree = sum [unit, product [var,var], product [var,var,var]]
 nat : Polynomial
 nat = sum [unit, var]
 
-drawing = drawMu 4 800 nat
+drawing = drawMu 3 1400 twoThreeTree
 -- drawing = juxt 100 (filled Color.green (square 100)) (filled Color.red (square 100))
 
-main = collage 800 800 [drawing]
+main = collage 1400 1400 [drawing]
 

@@ -1,14 +1,4 @@
-module Polynomial ( Poly(..)
-                  , Polynomial
-                  , drawMu
-                  , juxt
-                  , atop
-                  , sum
-                  , product
-                  , var
-                  , unit
-                  ) where
-
+module Polynomial where 
 import List
 import List((::))
 import Graphics.Collage(..)
@@ -55,14 +45,14 @@ inAColumn h xs =
       m = scaleMatrix 1 (1 / n)
   in
   groupTransform m
-    (List.indexedMap (\i a -> moveY (h/n * toFloat i - h/2) a) xs)
+    (List.indexedMap (\i a -> moveY (h * toFloat i - (n - 1) * h/2) a) xs)
 
 inARow h xs =
   let n = toFloat (List.length xs)
       m = scaleMatrix (1 / n) 1
   in
   groupTransform m
-    (List.indexedMap (\i a -> moveX (h/n * toFloat i - h/2) a) xs)
+    (List.indexedMap (\i a -> moveX (h * toFloat i - (n - 1) * h/2) a) xs)
 
 atop h a b =
   let m = scaleMatrix 1 (1/2)
@@ -79,21 +69,33 @@ juxt w a b =
 
 listInit f n =
   let go i =
-    if i == n - 1 then [] else f i :: go (i + 1)
+    if i == n then [] else f i :: go (i + 1)
   in
   go 0
 
 mulSeps len n =
   let a = len / toFloat n
       sep i =
-        let y = a * i - len / 2 in
+        let y = a * (toFloat i - (toFloat n - 2) / 2) in
         traced (dashed Color.black) (segment (-len/2, y) (len/2, y))
   in
   group (listInit sep (n - 1))
 
+addSeps len n =
+  let a = len / toFloat n
+      sep i =
+        let x   = a * (toFloat i - (toFloat n - 2) / 2)
+            sty = solid Color.blue
+        in
+        group
+        [ traced {sty | width <- 5} (segment (x, -len/2) (x, len/2)) 
+        , traced {sty | width <- 5} (segment (-10, 0) (10, 0))
+        ]
+  in
+  group (listInit sep (n - 1))
 
-mulSeparator len = traced (dashed Color.black) [(-len/2, 0), (len/2, 0)]
-addSeparator len = group [filled Color.green (rect 3 len), filled Color.black (rect 10 3)]
+-- mulSeparator len = traced (dashed Color.black) [(-len/2, 0), (len/2, 0)]
+-- addSeparator len = group [filled Color.green (rect 3 len), filled Color.black (rect 10 3)]
 
 colorSquares =
   let lightenUp c = 
@@ -110,8 +112,6 @@ colorFilters h n = inARow h (List.take n (colorSquares h))
 drawMu : Int -> Float -> Polynomial -> Form
 drawMu maxDepth len p =
   let boring d = filled Color.white (square len)
---      mulSep = mulSeparator len
-      addSep = addSeparator len
       levelCached t mem = Array.length mem > t
 
       -- Add is juxt. Mul is atop.
@@ -127,20 +127,12 @@ drawMu maxDepth len p =
                 then State.return (mem ! t)
                 else go (t - 1) p >!= \r -> State.map (\_ -> r) (State.modify (Array.push r))
 
-          {- This correct code caused the compiler to stack overflow (when (>!=) had no type annotation in State.elm)
-          Var ()    ->
-            State.get >!= \mem ->
-              if Array.length mem > d
-              then State.return (mem ! d)
-              else go (d + 1) p >!= \r -> State.map (\_ -> r) (State.modify (Array.push r))
-          -}
-
           Prod ps ->
-            State.map (\rs -> group [inARow len rs, mulSeps len (List.length ps)])
+            State.map (\rs -> group [inAColumn len rs, mulSeps len (List.length ps)])
               (State.mapM (go t) ps)
 
           Sum ps ->
-            State.map (\rs -> group [inARow len rs, colorFilters len (List.length ps)]) (State.mapM (go t) ps)
+            State.map (\rs -> group [inARow len rs, addSeps len (List.length ps)]) (State.mapM (go t) ps)
 
 {-
           Mul p1 p2 -> 
@@ -173,3 +165,11 @@ adopt p (drawPoly q) = drawPoly (subst p q)
 
 subst : Polynomial -> Polynomial -> Polynomial
 -}
+
+          {- This correct code caused the compiler to stack overflow (when (>!=) had no type annotation in State.elm)
+          Var ()    ->
+            State.get >!= \mem ->
+              if Array.length mem > d
+              then State.return (mem ! d)
+              else go (d + 1) p >!= \r -> State.map (\_ -> r) (State.modify (Array.push r))
+          -}
