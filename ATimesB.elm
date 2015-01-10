@@ -1,4 +1,4 @@
-module APlusB where
+module ATimesB where
 
 import Poly(..)
 import Interactive(..)

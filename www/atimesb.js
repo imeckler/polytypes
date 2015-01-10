@@ -1,24 +1,24 @@
 var Elm = Elm || { Native: {} };
-Elm.APlusB = Elm.APlusB || {};
-Elm.APlusB.make = function (_elm) {
+Elm.ATimesB = Elm.ATimesB || {};
+Elm.ATimesB.make = function (_elm) {
    "use strict";
-   _elm.APlusB = _elm.APlusB || {};
-   if (_elm.APlusB.values)
-   return _elm.APlusB.values;
+   _elm.ATimesB = _elm.ATimesB || {};
+   if (_elm.ATimesB.values)
+   return _elm.ATimesB.values;
    var _op = {},
    _N = Elm.Native,
    _U = _N.Utils.make(_elm),
    _L = _N.List.make(_elm),
    _P = _N.Ports.make(_elm),
-   $moduleName = "APlusB",
+   $moduleName = "ATimesB",
    $Interactive = Elm.Interactive.make(_elm),
    $Poly = Elm.Poly.make(_elm);
    var main = $Interactive.main$(A2($Poly.Mul,
    $Poly.Const("A"),
    $Poly.Const("B")));
-   _elm.APlusB.values = {_op: _op
-                        ,main: main};
-   return _elm.APlusB.values;
+   _elm.ATimesB.values = {_op: _op
+                         ,main: main};
+   return _elm.ATimesB.values;
 };
 Elm.Array = Elm.Array || {};
 Elm.Array.make = function (_elm) {
