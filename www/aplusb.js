@@ -4406,8 +4406,10 @@ Elm.Main.make = function (_elm) {
    $Interactive = Elm.Interactive.make(_elm),
    $Poly = Elm.Poly.make(_elm);
    var main = $Interactive.main$(A2($Poly.Add,
-   $Poly.Const("A"),
-   $Poly.Const("B")));
+   $Poly.Const("1"),
+   A2($Poly.Mul,
+   $Poly.Var,
+   $Poly.Var)));
    _elm.Main.values = {_op: _op
                       ,main: main};
    return _elm.Main.values;

@@ -3619,8 +3619,31 @@ Elm.Interactive.make = function (_elm) {
    $Html$Events = Elm.Html.Events.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
+   $Poly = Elm.Poly.make(_elm),
    $Signal = Elm.Signal.make(_elm),
    $Window = Elm.Window.make(_elm);
+   var ab = A2($Poly.Add,
+   $Poly.Const("A"),
+   $Poly.Const("B"));
+   var twoThree = A2($Poly.Add,
+   $Poly.Const(""),
+   A2($Poly.Add,
+   A2($Poly.Mul,
+   $Poly.Var,
+   $Poly.Var),
+   A2($Poly.Mul,
+   $Poly.Var,
+   A2($Poly.Mul,
+   $Poly.Var,
+   $Poly.Var))));
+   var binTree = A2($Poly.Add,
+   $Poly.Const("()"),
+   A2($Poly.Mul,
+   $Poly.Var,
+   $Poly.Var));
+   var nat = A2($Poly.Add,
+   $Poly.Const("()"),
+   $Poly.Var);
    var Right = {ctor: "Right"};
    var Continue = {ctor: "Continue"};
    var Left = {ctor: "Left"};
@@ -3634,29 +3657,13 @@ Elm.Interactive.make = function (_elm) {
             return modelable(p._0) && modelable(p._1);
             case "Var": return false;}
          _U.badCase($moduleName,
-         "between lines 87 and 91");
+         "between lines 85 and 89");
       }();
    };
-   var Mul = F2(function (a,b) {
-      return {ctor: "Mul"
-             ,_0: a
-             ,_1: b};
-   });
-   var Add = F2(function (a,b) {
-      return {ctor: "Add"
-             ,_0: a
-             ,_1: b};
-   });
-   var Const = function (a) {
-      return {ctor: "Const",_0: a};
+   var SetModel = function (a) {
+      return {ctor: "SetModel"
+             ,_0: a};
    };
-   var Var = {ctor: "Var"};
-   var nat = A2(Add,
-   Const("()"),
-   Var);
-   var binTree = A2(Add,
-   Const("()"),
-   A2(Mul,Var,Var));
    var Switch = function (a) {
       return {ctor: "Switch"
              ,_0: a};
@@ -3731,7 +3738,7 @@ Elm.Interactive.make = function (_elm) {
                                    m._1._0)]))]));}
                  break;}
             _U.badCase($moduleName,
-            "between lines 46 and 77");
+            "between lines 50 and 81");
          }();
       });
       return go(_L.fromArray([]));
@@ -3753,15 +3760,22 @@ Elm.Interactive.make = function (_elm) {
                                                                ,{ctor: "_Tuple2"
                                                                 ,_0: "height"
                                                                 ,_1: d}]));
-                 return A3($Html.toElement,
+                 return A2($Html.toElement,
                  _v18._0,
-                 _v18._1,
-                 A2($Html.div,
-                 _L.fromArray([css]),
-                 _L.fromArray([render(m)])));
+                 _v18._1)(A2($Html.div,
+                 _L.fromArray([]),
+                 _L.fromArray([A3($Html.node,
+                              "link",
+                              _L.fromArray([$Html$Attributes.rel("stylesheet")
+                                           ,$Html$Attributes.type$("text/css")
+                                           ,$Html$Attributes.href("www/tree.css")]),
+                              _L.fromArray([]))
+                              ,A2($Html.div,
+                              _L.fromArray([css]),
+                              _L.fromArray([render(m)]))])));
               }();}
          _U.badCase($moduleName,
-         "between lines 114 and 117");
+         "between lines 114 and 121");
       }();
    });
    var Constant = function (a) {
@@ -3866,10 +3880,11 @@ Elm.Interactive.make = function (_elm) {
       return function () {
          switch (u.ctor)
          {case "NoOp": return m;
+            case "SetModel": return u._0;
             case "Switch":
             return A2($switch,u._0,m);}
          _U.badCase($moduleName,
-         "between lines 36 and 38");
+         "between lines 39 and 42");
       }();
    });
    var state = function (m0) {
@@ -3889,42 +3904,42 @@ Elm.Interactive.make = function (_elm) {
                   return modelable(q._0) ? A2(LeftOpen,
                     {ctor: "_Tuple2"
                     ,_0: go(q._0)
-                    ,_1: function (_v55) {
+                    ,_1: function (_v56) {
                        return function () {
-                          switch (_v55.ctor)
+                          switch (_v56.ctor)
                           {case "_Tuple0":
                              return go(q._0);}
                           _U.badCase($moduleName,
-                          "on line 101, column 39 to 43");
+                          "on line 99, column 39 to 43");
                        }();
                     }},
-                    function (_v57) {
+                    function (_v58) {
                        return function () {
-                          switch (_v57.ctor)
+                          switch (_v58.ctor)
                           {case "_Tuple0":
                              return go(q._1);}
                           _U.badCase($moduleName,
-                          "on line 101, column 53 to 57");
+                          "on line 99, column 53 to 57");
                        }();
                     }) : A2(RightOpen,
-                    function (_v59) {
+                    function (_v60) {
                        return function () {
-                          switch (_v59.ctor)
+                          switch (_v60.ctor)
                           {case "_Tuple0":
                              return go(q._0);}
                           _U.badCase($moduleName,
-                          "on line 102, column 34 to 38");
+                          "on line 100, column 34 to 38");
                        }();
                     },
                     {ctor: "_Tuple2"
                     ,_0: go(q._1)
-                    ,_1: function (_v61) {
+                    ,_1: function (_v62) {
                        return function () {
-                          switch (_v61.ctor)
+                          switch (_v62.ctor)
                           {case "_Tuple0":
                              return go(q._1);}
                           _U.badCase($moduleName,
-                          "on line 102, column 54 to 58");
+                          "on line 100, column 54 to 58");
                        }();
                     }});
                   case "Const":
@@ -3934,41 +3949,40 @@ Elm.Interactive.make = function (_elm) {
                     go(q._1));
                   case "Var": return go(p);}
                _U.badCase($moduleName,
-               "between lines 95 and 106");
+               "between lines 93 and 104");
             }();
          };
          return modelable(p) ? $Maybe.Just(go(p)) : $Maybe.Nothing;
       }();
    };
-   var main = function () {
-      var poly = binTree;
-      var m0May = modelPoly(poly);
+   var main$ = function (poly) {
       return function () {
-         switch (m0May.ctor)
+         var _v64 = modelPoly(poly);
+         switch (_v64.ctor)
          {case "Just":
             return A3($Signal.map2,
               scene,
-              state(m0May._0),
+              state(_v64._0),
               $Window.dimensions);
             case "Nothing":
             return A2($Signal.map,
-              function (_v65) {
+              function (_v66) {
                  return function () {
-                    switch (_v65.ctor)
+                    switch (_v66.ctor)
                     {case "_Tuple2":
                        return A3($Html.toElement,
-                         _v65._0,
-                         _v65._1,
+                         _v66._0,
+                         _v66._1,
                          $Html.text("No fixed point"));}
                     _U.badCase($moduleName,
-                    "on line 132, column 38 to 79");
+                    "on line 135, column 38 to 79");
                  }();
               },
               $Window.dimensions);}
          _U.badCase($moduleName,
-         "between lines 130 and 132");
+         "between lines 133 and 135");
       }();
-   }();
+   };
    _elm.Interactive.values = {_op: _op
                              ,LeftOpen: LeftOpen
                              ,RightOpen: RightOpen
@@ -3977,13 +3991,10 @@ Elm.Interactive.make = function (_elm) {
                              ,$switch: $switch
                              ,NoOp: NoOp
                              ,Switch: Switch
+                             ,SetModel: SetModel
                              ,update: update
                              ,updateChan: updateChan
                              ,render: render
-                             ,Var: Var
-                             ,Const: Const
-                             ,Add: Add
-                             ,Mul: Mul
                              ,modelable: modelable
                              ,modelPoly: modelPoly
                              ,Left: Left
@@ -3993,7 +4004,9 @@ Elm.Interactive.make = function (_elm) {
                              ,state: state
                              ,nat: nat
                              ,binTree: binTree
-                             ,main: main};
+                             ,twoThree: twoThree
+                             ,ab: ab
+                             ,main$: main$};
    return _elm.Interactive.values;
 };
 Elm.Json = Elm.Json || {};
@@ -4377,6 +4390,29 @@ Elm.List.make = function (_elm) {
                       ,sortBy: sortBy
                       ,sortWith: sortWith};
    return _elm.List.values;
+};
+Elm.Main = Elm.Main || {};
+Elm.Main.make = function (_elm) {
+   "use strict";
+   _elm.Main = _elm.Main || {};
+   if (_elm.Main.values)
+   return _elm.Main.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   _P = _N.Ports.make(_elm),
+   $moduleName = "Main",
+   $Interactive = Elm.Interactive.make(_elm),
+   $Poly = Elm.Poly.make(_elm);
+   var main = $Interactive.main$(A2($Poly.Add,
+   $Poly.Const("1"),
+   A2($Poly.Mul,
+   $Poly.Var,
+   $Poly.Var)));
+   _elm.Main.values = {_op: _op
+                      ,main: main};
+   return _elm.Main.values;
 };
 Elm.Maybe = Elm.Maybe || {};
 Elm.Maybe.make = function (_elm) {
@@ -10857,6 +10893,39 @@ Elm.Native.Window.make = function(localRuntime) {
 
 };
 
+Elm.Poly = Elm.Poly || {};
+Elm.Poly.make = function (_elm) {
+   "use strict";
+   _elm.Poly = _elm.Poly || {};
+   if (_elm.Poly.values)
+   return _elm.Poly.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   _P = _N.Ports.make(_elm),
+   $moduleName = "Poly";
+   var Mul = F2(function (a,b) {
+      return {ctor: "Mul"
+             ,_0: a
+             ,_1: b};
+   });
+   var Add = F2(function (a,b) {
+      return {ctor: "Add"
+             ,_0: a
+             ,_1: b};
+   });
+   var Const = function (a) {
+      return {ctor: "Const",_0: a};
+   };
+   var Var = {ctor: "Var"};
+   _elm.Poly.values = {_op: _op
+                      ,Var: Var
+                      ,Const: Const
+                      ,Add: Add
+                      ,Mul: Mul};
+   return _elm.Poly.values;
+};
 Elm.Result = Elm.Result || {};
 Elm.Result.make = function (_elm) {
    "use strict";
