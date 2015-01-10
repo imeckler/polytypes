@@ -3664,6 +3664,76 @@ Elm.Interactive.make = function (_elm) {
    var NoOp = {ctor: "NoOp"};
    var updateChan = $Signal.channel(NoOp);
    var render = function () {
+      var go = F2(function (pos,
+      m) {
+         return function () {
+            switch (m.ctor)
+            {case "Constant":
+               return A2($Html.div,
+                 _L.fromArray([$Html$Attributes.$class("constant")]),
+                 _L.fromArray([A2($Html.span,
+                 _L.fromArray([$Html$Attributes.style(_L.fromArray([{ctor: "_Tuple2"
+                                                                    ,_0: "position"
+                                                                    ,_1: "relative"}
+                                                                   ,{ctor: "_Tuple2"
+                                                                    ,_0: "top"
+                                                                    ,_1: "50%"}]))]),
+                 _L.fromArray([$Html.text(m._0)]))]));
+               case "Join":
+               return A2($Html.div,
+                 _L.fromArray([$Html$Attributes.$class("mul")]),
+                 _L.fromArray([A2($Html.div,
+                              _L.fromArray([]),
+                              _L.fromArray([A2(go,
+                              A2($List._op["::"],Left,pos),
+                              m._0)]))
+                              ,A2($Html.div,
+                              _L.fromArray([]),
+                              _L.fromArray([A2(go,
+                              A2($List._op["::"],Right,pos),
+                              m._1)]))]));
+               case "LeftOpen":
+               switch (m._0.ctor)
+                 {case "_Tuple2":
+                    return A2($Html.div,
+                      _L.fromArray([$Html$Attributes.$class("add")]),
+                      _L.fromArray([A2($Html.div,
+                                   _L.fromArray([$Html$Attributes.$class("left")]),
+                                   _L.fromArray([A2(go,
+                                   A2($List._op["::"],
+                                   Continue,
+                                   pos),
+                                   m._0._0)]))
+                                   ,A2($Html.div,
+                                   _L.fromArray([$Html$Events.onClick(A2($Signal.send,
+                                                updateChan,
+                                                Switch($List.reverse(pos))))
+                                                ,$Html$Attributes.$class("cover right")]),
+                                   _L.fromArray([]))]));}
+                 break;
+               case "RightOpen":
+               switch (m._1.ctor)
+                 {case "_Tuple2":
+                    return A2($Html.div,
+                      _L.fromArray([$Html$Attributes.$class("add")]),
+                      _L.fromArray([A2($Html.div,
+                                   _L.fromArray([$Html$Events.onClick(A2($Signal.send,
+                                                updateChan,
+                                                Switch($List.reverse(pos))))
+                                                ,$Html$Attributes.$class("cover left")]),
+                                   _L.fromArray([]))
+                                   ,A2($Html.div,
+                                   _L.fromArray([$Html$Attributes.$class("right")]),
+                                   _L.fromArray([A2(go,
+                                   A2($List._op["::"],
+                                   Continue,
+                                   pos),
+                                   m._1._0)]))]));}
+                 break;}
+            _U.badCase($moduleName,
+            "between lines 71 and 102");
+         }();
+      });
       var constantStyle = $Html$Attributes.style(_L.fromArray([{ctor: "_Tuple2"
                                                                ,_0: "textAlign"
                                                                ,_1: "center"}
@@ -3713,91 +3783,6 @@ Elm.Interactive.make = function (_elm) {
                                 ,{ctor: "_Tuple2"
                                  ,_0: "height"
                                  ,_1: "100%"}]);
-      var go = F2(function (pos,m) {
-         return function () {
-            switch (m.ctor)
-            {case "Constant":
-               return A2($Html.div,
-                 _L.fromArray([constantStyle]),
-                 _L.fromArray([A2($Html.span,
-                 _L.fromArray([$Html$Attributes.style(_L.fromArray([{ctor: "_Tuple2"
-                                                                    ,_0: "position"
-                                                                    ,_1: "relative"}
-                                                                   ,{ctor: "_Tuple2"
-                                                                    ,_0: "top"
-                                                                    ,_1: "50%"}]))]),
-                 _L.fromArray([$Html.text(m._0)]))]));
-               case "Join":
-               return A2($Html.div,
-                 _L.fromArray([topStyle]),
-                 _L.fromArray([A2($Html.div,
-                              _L.fromArray([prodStyle]),
-                              _L.fromArray([A2(go,
-                              A2($List._op["::"],Left,pos),
-                              m._0)]))
-                              ,A2($Html.div,
-                              _L.fromArray([prodStyle]),
-                              _L.fromArray([A2(go,
-                              A2($List._op["::"],Right,pos),
-                              m._1)]))]));
-               case "LeftOpen":
-               switch (m._0.ctor)
-                 {case "_Tuple2":
-                    return A2($Html.div,
-                      _L.fromArray([topStyle]),
-                      _L.fromArray([A2($Html.div,
-                                   _L.fromArray([$Html$Attributes.style(A2($List._op["::"],
-                                   {ctor: "_Tuple2"
-                                   ,_0: "cssFloat"
-                                   ,_1: "left"},
-                                   sumCss))]),
-                                   _L.fromArray([A2(go,
-                                   A2($List._op["::"],
-                                   Continue,
-                                   pos),
-                                   m._0._0)]))
-                                   ,A2($Html.div,
-                                   _L.fromArray([$Html$Attributes.style(A2($List._op["::"],
-                                                {ctor: "_Tuple2"
-                                                ,_0: "marginLeft"
-                                                ,_1: "50%"},
-                                                coveredCss))
-                                                ,$Html$Events.onClick(A2($Signal.send,
-                                                updateChan,
-                                                Switch($List.reverse(pos))))]),
-                                   _L.fromArray([]))]));}
-                 break;
-               case "RightOpen":
-               switch (m._1.ctor)
-                 {case "_Tuple2":
-                    return A2($Html.div,
-                      _L.fromArray([topStyle]),
-                      _L.fromArray([A2($Html.div,
-                                   _L.fromArray([$Html$Attributes.style(A2($List._op["::"],
-                                                {ctor: "_Tuple2"
-                                                ,_0: "cssFloat"
-                                                ,_1: "left"},
-                                                coveredCss))
-                                                ,$Html$Events.onClick(A2($Signal.send,
-                                                updateChan,
-                                                Switch($List.reverse(pos))))]),
-                                   _L.fromArray([]))
-                                   ,A2($Html.div,
-                                   _L.fromArray([$Html$Attributes.style(A2($List._op["::"],
-                                   {ctor: "_Tuple2"
-                                   ,_0: "marginLeft"
-                                   ,_1: "50%"},
-                                   sumCss))]),
-                                   _L.fromArray([A2(go,
-                                   A2($List._op["::"],
-                                   Continue,
-                                   pos),
-                                   m._1._0)]))]));}
-                 break;}
-            _U.badCase($moduleName,
-            "between lines 71 and 102");
-         }();
-      });
       return go(_L.fromArray([]));
    }();
    var scene = F2(function (m,

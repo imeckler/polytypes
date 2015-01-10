@@ -7,7 +7,7 @@ import Signal
 import Html
 import Html(..)
 import Html.Attributes
-import Html.Attributes(style, width, height)
+import Html.Attributes(class, style, width, height)
 import Html.Events (onClick)
 import Window
 
@@ -70,33 +70,33 @@ render =
       go pos m      =
         case m of
           LeftOpen (l, _) _ ->
-            div [topStyle]
-            [ div [style (("cssFloat", "left") :: sumCss)] [go (Continue :: pos) l]
+            div [class "add"]
+            [ div [class "left"] [go (Continue :: pos) l]
             , div
-              [ style (("marginLeft", "50%") :: coveredCss)
-              , onClick (Signal.send updateChan (Switch (List.reverse pos)))
+              [ onClick (Signal.send updateChan (Switch (List.reverse pos)))
+              , class "cover right"
               ]
               []
             ]
 
           RightOpen _ (r, _) ->
-            div [topStyle]
+            div [class "add"]
             [ div
-              [ style (("cssFloat", "left") :: coveredCss)
-              , onClick (Signal.send updateChan (Switch (List.reverse pos)))
+              [ onClick (Signal.send updateChan (Switch (List.reverse pos)))
+              , class "cover left"
               ]
               []
-            , div [style (("marginLeft", "50%") :: sumCss)] [go (Continue :: pos) r]
+            , div [class "right"] [go (Continue :: pos) r]
             ]
 
           Join ml mr ->
-            div [topStyle]
-            [ div [prodStyle] [go (Left :: pos) ml]
-            , div [prodStyle] [go (Right :: pos) mr]
+            div [class "mul"]
+            [ div [] [go (Left :: pos) ml]
+            , div [] [go (Right :: pos) mr]
             ]
 
           Constant s ->
-            div [constantStyle]
+            div [class "constant"]
             [ span [style [("position", "relative"), ("top", "50%")]] [text s]
             ]
   in
