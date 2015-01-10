@@ -129,11 +129,8 @@ binTree = Add (Const "()") (Mul Var Var)
 twoThree = Add (Const "") (Add (Mul Var Var) (Mul Var (Mul Var Var)))
 ab = Add (Const "A") (Const "B")
 
-main =
-  let poly  = ab
-      m0May = modelPoly poly
-  in
-  case m0May of
+main' poly =
+  case modelPoly poly of
     Just m0 -> Signal.map2 scene (state m0) Window.dimensions
     Nothing -> Signal.map (\(w,h) -> Html.toElement w h (text "No fixed point")) Window.dimensions
 

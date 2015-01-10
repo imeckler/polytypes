@@ -3955,15 +3955,14 @@ Elm.Interactive.make = function (_elm) {
          return modelable(p) ? $Maybe.Just(go(p)) : $Maybe.Nothing;
       }();
    };
-   var main = function () {
-      var poly = ab;
-      var m0May = modelPoly(poly);
+   var main$ = function (poly) {
       return function () {
-         switch (m0May.ctor)
+         var _v64 = modelPoly(poly);
+         switch (_v64.ctor)
          {case "Just":
             return A3($Signal.map2,
               scene,
-              state(m0May._0),
+              state(_v64._0),
               $Window.dimensions);
             case "Nothing":
             return A2($Signal.map,
@@ -3976,14 +3975,14 @@ Elm.Interactive.make = function (_elm) {
                          _v66._1,
                          $Html.text("No fixed point"));}
                     _U.badCase($moduleName,
-                    "on line 138, column 38 to 79");
+                    "on line 135, column 38 to 79");
                  }();
               },
               $Window.dimensions);}
          _U.badCase($moduleName,
-         "between lines 136 and 138");
+         "between lines 133 and 135");
       }();
-   }();
+   };
    _elm.Interactive.values = {_op: _op
                              ,LeftOpen: LeftOpen
                              ,RightOpen: RightOpen
@@ -4007,7 +4006,7 @@ Elm.Interactive.make = function (_elm) {
                              ,binTree: binTree
                              ,twoThree: twoThree
                              ,ab: ab
-                             ,main: main};
+                             ,main$: main$};
    return _elm.Interactive.values;
 };
 Elm.Json = Elm.Json || {};
@@ -4391,6 +4390,27 @@ Elm.List.make = function (_elm) {
                       ,sortBy: sortBy
                       ,sortWith: sortWith};
    return _elm.List.values;
+};
+Elm.Main = Elm.Main || {};
+Elm.Main.make = function (_elm) {
+   "use strict";
+   _elm.Main = _elm.Main || {};
+   if (_elm.Main.values)
+   return _elm.Main.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   _P = _N.Ports.make(_elm),
+   $moduleName = "Main",
+   $Interactive = Elm.Interactive.make(_elm),
+   $Poly = Elm.Poly.make(_elm);
+   var main = $Interactive.main$(A2($Poly.Add,
+   $Poly.Const("A"),
+   $Poly.Const("B")));
+   _elm.Main.values = {_op: _op
+                      ,main: main};
+   return _elm.Main.values;
 };
 Elm.Maybe = Elm.Maybe || {};
 Elm.Maybe.make = function (_elm) {
