@@ -45,7 +45,6 @@ render =
   let sumCss =
         [ ("width", "50%")
         , ("height", "100%")
-        , ("display", "inline-block")
         ]
       prodCss =
         [ ("width", "100%")
@@ -56,7 +55,6 @@ render =
         , ("width", "50%")
         , ("boxShadow", "inset 0 0 0 3px #AAA")
         , ("height", "100%")
-        , ("display", "inline-block")
         ]
       prodStyle     = style prodCss
       topStyle      = style [("width", "100%"), ("height", "100%")]
@@ -75,7 +73,7 @@ render =
             div [topStyle]
             [ div [style (("cssFloat", "left") :: sumCss)] [go (Continue :: pos) l]
             , div
-              [ style coveredCss
+              [ style (("marginLeft", "50%") :: coveredCss)
               , onClick (Signal.send updateChan (Switch (List.reverse pos)))
               ]
               []
@@ -88,7 +86,7 @@ render =
               , onClick (Signal.send updateChan (Switch (List.reverse pos)))
               ]
               []
-            , div [style sumCss] [go (Continue :: pos) r]
+            , div [style (("marginLeft", "50%") :: sumCss)] [go (Continue :: pos) r]
             ]
 
           Join ml mr ->

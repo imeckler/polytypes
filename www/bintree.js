@@ -3634,7 +3634,7 @@ Elm.Interactive.make = function (_elm) {
             return modelable(p._0) && modelable(p._1);
             case "Var": return false;}
          _U.badCase($moduleName,
-         "between lines 114 and 118");
+         "between lines 112 and 116");
       }();
    };
    var Mul = F2(function (a,b) {
@@ -3699,10 +3699,7 @@ Elm.Interactive.make = function (_elm) {
                                      ,_1: "inset 0 0 0 3px #AAA"}
                                     ,{ctor: "_Tuple2"
                                      ,_0: "height"
-                                     ,_1: "100%"}
-                                    ,{ctor: "_Tuple2"
-                                     ,_0: "display"
-                                     ,_1: "inline-block"}]);
+                                     ,_1: "100%"}]);
       var prodCss = _L.fromArray([{ctor: "_Tuple2"
                                   ,_0: "width"
                                   ,_1: "100%"}
@@ -3715,10 +3712,7 @@ Elm.Interactive.make = function (_elm) {
                                  ,_1: "50%"}
                                 ,{ctor: "_Tuple2"
                                  ,_0: "height"
-                                 ,_1: "100%"}
-                                ,{ctor: "_Tuple2"
-                                 ,_0: "display"
-                                 ,_1: "inline-block"}]);
+                                 ,_1: "100%"}]);
       var go = F2(function (pos,m) {
          return function () {
             switch (m.ctor)
@@ -3763,7 +3757,11 @@ Elm.Interactive.make = function (_elm) {
                                    pos),
                                    m._0._0)]))
                                    ,A2($Html.div,
-                                   _L.fromArray([$Html$Attributes.style(coveredCss)
+                                   _L.fromArray([$Html$Attributes.style(A2($List._op["::"],
+                                                {ctor: "_Tuple2"
+                                                ,_0: "marginLeft"
+                                                ,_1: "50%"},
+                                                coveredCss))
                                                 ,$Html$Events.onClick(A2($Signal.send,
                                                 updateChan,
                                                 Switch($List.reverse(pos))))]),
@@ -3785,7 +3783,11 @@ Elm.Interactive.make = function (_elm) {
                                                 Switch($List.reverse(pos))))]),
                                    _L.fromArray([]))
                                    ,A2($Html.div,
-                                   _L.fromArray([$Html$Attributes.style(sumCss)]),
+                                   _L.fromArray([$Html$Attributes.style(A2($List._op["::"],
+                                   {ctor: "_Tuple2"
+                                   ,_0: "marginLeft"
+                                   ,_1: "50%"},
+                                   sumCss))]),
                                    _L.fromArray([A2(go,
                                    A2($List._op["::"],
                                    Continue,
@@ -3793,7 +3795,7 @@ Elm.Interactive.make = function (_elm) {
                                    m._1._0)]))]));}
                  break;}
             _U.badCase($moduleName,
-            "between lines 73 and 104");
+            "between lines 71 and 102");
          }();
       });
       return go(_L.fromArray([]));
@@ -3814,10 +3816,7 @@ Elm.Interactive.make = function (_elm) {
                                                                 ,_1: d}
                                                                ,{ctor: "_Tuple2"
                                                                 ,_0: "height"
-                                                                ,_1: d}
-                                                               ,{ctor: "_Tuple2"
-                                                                ,_0: "userSelect"
-                                                                ,_1: "none"}]));
+                                                                ,_1: d}]));
                  return A3($Html.toElement,
                  _v18._0,
                  _v18._1,
@@ -3826,7 +3825,7 @@ Elm.Interactive.make = function (_elm) {
                  _L.fromArray([render(m)])));
               }();}
          _U.badCase($moduleName,
-         "between lines 141 and 144");
+         "between lines 139 and 142");
       }();
    });
    var Constant = function (a) {
@@ -3960,7 +3959,7 @@ Elm.Interactive.make = function (_elm) {
                           {case "_Tuple0":
                              return go(q._0);}
                           _U.badCase($moduleName,
-                          "on line 128, column 39 to 43");
+                          "on line 126, column 39 to 43");
                        }();
                     }},
                     function (_v57) {
@@ -3969,7 +3968,7 @@ Elm.Interactive.make = function (_elm) {
                           {case "_Tuple0":
                              return go(q._1);}
                           _U.badCase($moduleName,
-                          "on line 128, column 53 to 57");
+                          "on line 126, column 53 to 57");
                        }();
                     }) : A2(RightOpen,
                     function (_v59) {
@@ -3978,7 +3977,7 @@ Elm.Interactive.make = function (_elm) {
                           {case "_Tuple0":
                              return go(q._0);}
                           _U.badCase($moduleName,
-                          "on line 129, column 34 to 38");
+                          "on line 127, column 34 to 38");
                        }();
                     },
                     {ctor: "_Tuple2"
@@ -3989,7 +3988,7 @@ Elm.Interactive.make = function (_elm) {
                           {case "_Tuple0":
                              return go(q._1);}
                           _U.badCase($moduleName,
-                          "on line 129, column 54 to 58");
+                          "on line 127, column 54 to 58");
                        }();
                     }});
                   case "Const":
@@ -3999,7 +3998,7 @@ Elm.Interactive.make = function (_elm) {
                     go(q._1));
                   case "Var": return go(p);}
                _U.badCase($moduleName,
-               "between lines 122 and 133");
+               "between lines 120 and 131");
             }();
          };
          return modelable(p) ? $Maybe.Just(go(p)) : $Maybe.Nothing;
@@ -4026,12 +4025,12 @@ Elm.Interactive.make = function (_elm) {
                          _v65._1,
                          $Html.text("No fixed point"));}
                     _U.badCase($moduleName,
-                    "on line 159, column 38 to 79");
+                    "on line 157, column 38 to 79");
                  }();
               },
               $Window.dimensions);}
          _U.badCase($moduleName,
-         "between lines 157 and 159");
+         "between lines 155 and 157");
       }();
    }();
    _elm.Interactive.values = {_op: _op
