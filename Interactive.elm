@@ -55,7 +55,7 @@ render =
               [ onClick (Signal.send updateChan (Switch (List.reverse pos)))
               , class "cover right"
               ]
-              []
+              [ span [class "glyphicon glyphicon-arrow-left"] []]
             ]
 
           RightOpen _ (r, _) ->
@@ -64,7 +64,7 @@ render =
               [ onClick (Signal.send updateChan (Switch (List.reverse pos)))
               , class "cover left"
               ]
-              []
+              [ span [class "glyphicon glyphicon-arrow-right"] [] ]
             , div [class "right"] [go (Continue :: pos) r]
             ]
 

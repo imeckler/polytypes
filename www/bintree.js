@@ -3739,7 +3739,9 @@ Elm.Interactive.make = function (_elm) {
                                                 updateChan,
                                                 Switch($List.reverse(pos))))
                                                 ,$Html$Attributes.$class("cover right")]),
-                                   _L.fromArray([]))]));}
+                                   _L.fromArray([A2($Html.span,
+                                   _L.fromArray([$Html$Attributes.$class("glyphicon glyphicon-arrow-left")]),
+                                   _L.fromArray([]))]))]));}
                  break;
                case "RightOpen":
                switch (m._1.ctor)
@@ -3751,7 +3753,9 @@ Elm.Interactive.make = function (_elm) {
                                                 updateChan,
                                                 Switch($List.reverse(pos))))
                                                 ,$Html$Attributes.$class("cover left")]),
-                                   _L.fromArray([]))
+                                   _L.fromArray([A2($Html.span,
+                                   _L.fromArray([$Html$Attributes.$class("glyphicon glyphicon-arrow-right")]),
+                                   _L.fromArray([]))]))
                                    ,A2($Html.div,
                                    _L.fromArray([$Html$Attributes.$class("right")]),
                                    _L.fromArray([A2(go,
