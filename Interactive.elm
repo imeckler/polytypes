@@ -42,32 +42,7 @@ updateChan = Signal.channel NoOp
 
 render : Model -> Html
 render =
-  let sumCss =
-        [ ("width", "50%")
-        , ("height", "100%")
-        ]
-      prodCss =
-        [ ("width", "100%")
-        , ("height", "50%")
-        ]
-      coveredCss =
-        [ ("backgroundColor", "#333") -- "repeating-linear-gradient(45deg,#AAA,#AAA 3px,#333 3px,#333 6px)")
-        , ("width", "50%")
-        , ("boxShadow", "inset 0 0 0 3px #AAA")
-        , ("height", "100%")
-        ]
-      prodStyle     = style prodCss
-      topStyle      = style [("width", "100%"), ("height", "100%")]
-      constantStyle =
-        style 
-        [ ("textAlign", "center")
-        , ("boxShadow", "inset 0 0 0 3px #AAA")
-        , ("height", "100%")
-        , ("width", "100%")
-        , ("fontSize", "14px")
-        , ("backgroundColor", "#009CFF")
-        ]
-      go pos m      =
+  let go pos m =
         case m of
           LeftOpen (l, _) _ ->
             div [class "add"]

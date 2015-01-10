@@ -3634,7 +3634,7 @@ Elm.Interactive.make = function (_elm) {
             return modelable(p._0) && modelable(p._1);
             case "Var": return false;}
          _U.badCase($moduleName,
-         "between lines 112 and 116");
+         "between lines 87 and 91");
       }();
    };
    var Mul = F2(function (a,b) {
@@ -3731,58 +3731,9 @@ Elm.Interactive.make = function (_elm) {
                                    m._1._0)]))]));}
                  break;}
             _U.badCase($moduleName,
-            "between lines 71 and 102");
+            "between lines 46 and 77");
          }();
       });
-      var constantStyle = $Html$Attributes.style(_L.fromArray([{ctor: "_Tuple2"
-                                                               ,_0: "textAlign"
-                                                               ,_1: "center"}
-                                                              ,{ctor: "_Tuple2"
-                                                               ,_0: "boxShadow"
-                                                               ,_1: "inset 0 0 0 3px #AAA"}
-                                                              ,{ctor: "_Tuple2"
-                                                               ,_0: "height"
-                                                               ,_1: "100%"}
-                                                              ,{ctor: "_Tuple2"
-                                                               ,_0: "width"
-                                                               ,_1: "100%"}
-                                                              ,{ctor: "_Tuple2"
-                                                               ,_0: "fontSize"
-                                                               ,_1: "14px"}
-                                                              ,{ctor: "_Tuple2"
-                                                               ,_0: "backgroundColor"
-                                                               ,_1: "#009CFF"}]));
-      var topStyle = $Html$Attributes.style(_L.fromArray([{ctor: "_Tuple2"
-                                                          ,_0: "width"
-                                                          ,_1: "100%"}
-                                                         ,{ctor: "_Tuple2"
-                                                          ,_0: "height"
-                                                          ,_1: "100%"}]));
-      var coveredCss = _L.fromArray([{ctor: "_Tuple2"
-                                     ,_0: "backgroundColor"
-                                     ,_1: "#333"}
-                                    ,{ctor: "_Tuple2"
-                                     ,_0: "width"
-                                     ,_1: "50%"}
-                                    ,{ctor: "_Tuple2"
-                                     ,_0: "boxShadow"
-                                     ,_1: "inset 0 0 0 3px #AAA"}
-                                    ,{ctor: "_Tuple2"
-                                     ,_0: "height"
-                                     ,_1: "100%"}]);
-      var prodCss = _L.fromArray([{ctor: "_Tuple2"
-                                  ,_0: "width"
-                                  ,_1: "100%"}
-                                 ,{ctor: "_Tuple2"
-                                  ,_0: "height"
-                                  ,_1: "50%"}]);
-      var prodStyle = $Html$Attributes.style(prodCss);
-      var sumCss = _L.fromArray([{ctor: "_Tuple2"
-                                 ,_0: "width"
-                                 ,_1: "50%"}
-                                ,{ctor: "_Tuple2"
-                                 ,_0: "height"
-                                 ,_1: "100%"}]);
       return go(_L.fromArray([]));
    }();
    var scene = F2(function (m,
@@ -3810,7 +3761,7 @@ Elm.Interactive.make = function (_elm) {
                  _L.fromArray([render(m)])));
               }();}
          _U.badCase($moduleName,
-         "between lines 139 and 142");
+         "between lines 114 and 117");
       }();
    });
    var Constant = function (a) {
@@ -3944,7 +3895,7 @@ Elm.Interactive.make = function (_elm) {
                           {case "_Tuple0":
                              return go(q._0);}
                           _U.badCase($moduleName,
-                          "on line 126, column 39 to 43");
+                          "on line 101, column 39 to 43");
                        }();
                     }},
                     function (_v57) {
@@ -3953,7 +3904,7 @@ Elm.Interactive.make = function (_elm) {
                           {case "_Tuple0":
                              return go(q._1);}
                           _U.badCase($moduleName,
-                          "on line 126, column 53 to 57");
+                          "on line 101, column 53 to 57");
                        }();
                     }) : A2(RightOpen,
                     function (_v59) {
@@ -3962,7 +3913,7 @@ Elm.Interactive.make = function (_elm) {
                           {case "_Tuple0":
                              return go(q._0);}
                           _U.badCase($moduleName,
-                          "on line 127, column 34 to 38");
+                          "on line 102, column 34 to 38");
                        }();
                     },
                     {ctor: "_Tuple2"
@@ -3973,7 +3924,7 @@ Elm.Interactive.make = function (_elm) {
                           {case "_Tuple0":
                              return go(q._1);}
                           _U.badCase($moduleName,
-                          "on line 127, column 54 to 58");
+                          "on line 102, column 54 to 58");
                        }();
                     }});
                   case "Const":
@@ -3983,7 +3934,7 @@ Elm.Interactive.make = function (_elm) {
                     go(q._1));
                   case "Var": return go(p);}
                _U.badCase($moduleName,
-               "between lines 120 and 131");
+               "between lines 95 and 106");
             }();
          };
          return modelable(p) ? $Maybe.Just(go(p)) : $Maybe.Nothing;
@@ -4010,12 +3961,12 @@ Elm.Interactive.make = function (_elm) {
                          _v65._1,
                          $Html.text("No fixed point"));}
                     _U.badCase($moduleName,
-                    "on line 157, column 38 to 79");
+                    "on line 132, column 38 to 79");
                  }();
               },
               $Window.dimensions);}
          _U.badCase($moduleName,
-         "between lines 155 and 157");
+         "between lines 130 and 132");
       }();
    }();
    _elm.Interactive.values = {_op: _op
