@@ -7,8 +7,10 @@ import Signal
 import Html
 import Html(..)
 import Html.Attributes
-import Html.Attributes(class, style, width, height)
-import Html.Events (onClick)
+import Html.Attributes(class, style, width, height, rel, type',href)
+import Html.Events (onClick, on)
+import Html.Events
+import Poly(..)
 import Window
 
 type Model
@@ -31,11 +33,13 @@ switch p m = case (p, m) of
 type Update
   = NoOp
   | Switch Position
+  | SetModel Model
 
 update : Update -> Model -> Model
 update u m = case u of
-  NoOp     -> m
-  Switch p -> switch p m
+  NoOp        -> m
+  Switch p    -> switch p m
+  SetModel m' -> m'
 
 updateChan : Signal.Channel Update
 updateChan = Signal.channel NoOp
@@ -77,12 +81,6 @@ render =
   in
   go []
 
-type Poly
-  = Var
-  | Const String
-  | Add Poly Poly
-  | Mul Poly Poly
-
 modelable : Poly -> Bool
 modelable p = case p of
   Var        -> False
@@ -110,11 +108,17 @@ modelPoly p =
 type Dir = Left | Continue | Right
 type alias Position = List Dir
 
+-- parsePoly = 
+
 scene m (w, h) =
   let d = toString (min w h) ++ "px" 
       css = style [("width", d), ("height", d)]
   in
-  Html.toElement w h (div [css] [render m])
+  div []
+  [ node "link" [rel "stylesheet", type' "text/css", href "www/tree.css"] []
+  , div [css] [render m]
+  ]
+  |> Html.toElement w h
 
 state m0 =
   Signal.foldp update m0 (Signal.map (Debug.watch "Update") (Signal.subscribe updateChan))
@@ -122,9 +126,11 @@ state m0 =
 
 nat = Add (Const "()") Var
 binTree = Add (Const "()") (Mul Var Var)
+twoThree = Add (Const "") (Add (Mul Var Var) (Mul Var (Mul Var Var)))
+ab = Add (Const "A") (Const "B")
 
 main =
-  let poly  = binTree
+  let poly  = ab
       m0May = modelPoly poly
   in
   case m0May of
