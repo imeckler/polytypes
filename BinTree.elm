@@ -1,4 +1,4 @@
-module Main where
+module BinTree where
 
 import Poly(..)
 import Interactive(..)

@@ -1,4 +1,4 @@
-module Main where
+module APlusB where
 
 import Poly(..)
 import Interactive(..)

@@ -268,6 +268,29 @@ Elm.Basics.make = function (_elm) {
                         ,uncurry: uncurry};
    return _elm.Basics.values;
 };
+Elm.BinTree = Elm.BinTree || {};
+Elm.BinTree.make = function (_elm) {
+   "use strict";
+   _elm.BinTree = _elm.BinTree || {};
+   if (_elm.BinTree.values)
+   return _elm.BinTree.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   _P = _N.Ports.make(_elm),
+   $moduleName = "BinTree",
+   $Interactive = Elm.Interactive.make(_elm),
+   $Poly = Elm.Poly.make(_elm);
+   var main = $Interactive.main$(A2($Poly.Add,
+   $Poly.Const("1"),
+   A2($Poly.Mul,
+   $Poly.Var,
+   $Poly.Var)));
+   _elm.BinTree.values = {_op: _op
+                         ,main: main};
+   return _elm.BinTree.values;
+};
 Elm.Char = Elm.Char || {};
 Elm.Char.make = function (_elm) {
    "use strict";
@@ -4390,29 +4413,6 @@ Elm.List.make = function (_elm) {
                       ,sortBy: sortBy
                       ,sortWith: sortWith};
    return _elm.List.values;
-};
-Elm.Main = Elm.Main || {};
-Elm.Main.make = function (_elm) {
-   "use strict";
-   _elm.Main = _elm.Main || {};
-   if (_elm.Main.values)
-   return _elm.Main.values;
-   var _op = {},
-   _N = Elm.Native,
-   _U = _N.Utils.make(_elm),
-   _L = _N.List.make(_elm),
-   _P = _N.Ports.make(_elm),
-   $moduleName = "Main",
-   $Interactive = Elm.Interactive.make(_elm),
-   $Poly = Elm.Poly.make(_elm);
-   var main = $Interactive.main$(A2($Poly.Add,
-   $Poly.Const("1"),
-   A2($Poly.Mul,
-   $Poly.Var,
-   $Poly.Var)));
-   _elm.Main.values = {_op: _op
-                      ,main: main};
-   return _elm.Main.values;
 };
 Elm.Maybe = Elm.Maybe || {};
 Elm.Maybe.make = function (_elm) {
